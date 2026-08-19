@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#1367d1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="D2 Study">
+  <meta name="description" content="第二種電気工事士の基礎学習・短問演習・過去問・誤答復習">
+  <title>D2 Study</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="app">
+    <header class="header">
+      <div><h1>D2 Study</h1><p>第二種電気工事士 学科学習</p></div>
+      <button id="backupBtn" class="btn ghost">バックアップ</button>
+    </header>
+
+    <section id="installHint" class="card install" hidden>
+      <strong>iPhoneでアプリとして使えます</strong>
+      <p>Safariの共有ボタンから「ホーム画面に追加」を選ぶと、全画面のWebアプリとして起動できます。</p>
+      <button id="dismissInstall" class="btn ghost">表示しない</button>
+    </section>
+
+    <section id="home" class="view active">
+      <div class="metrics">
+        <article class="card"><span>正答率</span><b id="accuracy">—</b><div class="bar"><i id="accuracyBar"></i></div></article>
+        <article class="card"><span>演習済み</span><b id="attempts">0問</b></article>
+        <article class="card"><span>要復習</span><b id="mistakes">0問</b></article>
+      </div>
+      <article class="card lead">
+        <h2>今日の学習</h2>
+        <p>基礎を1項目確認し、短問を10問。その後に公式過去問へ進む流れを想定しています。</p>
+        <div class="actions"><button class="btn primary" data-go="quiz">10問解く</button><button class="btn" data-go="learn">基礎を読む</button><button class="btn" data-go="past">過去問</button></div>
+      </article>
+      <article class="card"><h2>本番形式</h2><p class="big">50問 / 120分</p><p>1問2点。60点を基準として、30問正解を目標にします。</p></article>
+    </section>
+
+    <section id="learn" class="view"><div class="title"><h2>基礎学習</h2><span>要点を短く確認</span></div><div id="lessonList"></div></section>
+
+    <section id="quiz" class="view">
+      <div class="title"><h2>短問演習</h2><span>オリジナル問題</span></div>
+      <div id="categoryChips" class="chips"></div>
+      <article class="card quiz">
+        <div class="qmeta"><span id="qCategory"></span><span id="qNo"></span></div>
+        <div id="qText" class="qtext"></div>
+        <div id="qOptions" class="options"></div>
+        <div id="qExplain" class="explain" hidden></div>
+        <div class="actions spread"><button id="randomBtn" class="btn">別の問題</button><button id="nextBtn" class="btn primary" hidden>次へ</button></div>
+      </article>
+    </section>
+
+    <section id="past" class="view">
+      <div class="title"><h2>公式過去問</h2><span>公式PDF＋解答欄</span></div>
+      <article class="card">
+        <div class="pastTop"><select id="examSelect"></select><button id="pdfBtn" class="btn primary">公式問題PDF</button><button id="timerBtn" class="btn">120分開始</button><b id="timer">120:00</b></div>
+        <p id="examSource" class="muted"></p><p id="examResult" class="result"></p>
+        <div id="answerGrid" class="answerGrid"></div>
+        <div class="actions"><button id="scoreBtn" class="btn primary">採点する</button><button id="clearExamBtn" class="btn ghost">解答を消す</button></div>
+      </article>
+    </section>
+
+    <section id="review" class="view"><div class="title"><h2>誤答復習</h2><span>間違えた短問のみ</span></div><div id="reviewList"></div></section>
+
+    <section id="settings" class="view">
+      <div class="title"><h2>設定</h2><span>端末内保存</span></div>
+      <article class="card"><p>進捗はこのブラウザのlocalStorageに保存します。SafariのWebサイトデータを消去すると失われる場合があります。</p><div class="actions"><button id="exportBtn" class="btn">JSONを書き出す</button><button id="importBtn" class="btn">JSONを読み込む</button><input id="importFile" type="file" accept="application/json" hidden><button id="resetBtn" class="btn danger">全進捗を消去</button></div></article>
+    </section>
+  </main>
+
+  <nav class="nav"><button class="active" data-view="home">ホーム</button><button data-view="learn">基礎</button><button data-view="quiz">演習</button><button data-view="past">過去問</button><button data-view="review">復習</button></nav>
+
+  <script src="./data.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
